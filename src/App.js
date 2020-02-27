@@ -18,7 +18,7 @@ class App extends Component {
     });
   };
 
-  handleSubmmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     const newItem = {
       id: this.state.id,
@@ -34,20 +34,33 @@ class App extends Component {
   };
 
   clearList = () => {
-    console.log("clear list");
+    this.setState({
+      items: []
+    });
   };
   handleDelete = id => {
-    console.log(`handle edit ${id}`);
+    const filteredItems = this.state.items.filter(item => item.id !== id);
+    this.setState({
+      items: filteredItems
+    });
   };
   handleEdit = id => {
-    console.log(`edit edit ${id}`);
+    const filteredItems = this.state.items.filter(item => item.id !== id);
+    const selectedItem = this.state.items.find(item => item.id === id);
+
+    this.setState({
+      items: filteredItems,
+      item: selectedItem.title,
+      id: id,
+      editItem: true
+    });
   };
   render() {
     return (
       <div className="container">
         <div className="row">
           <div className="col-10 ma-auto col-md-8 mt-4">
-            <h3 className="text-capitalize text-center">Todo Input</h3>
+            <h3 className="text-capitalize text-center">輸入待辦事項</h3>
             <TodoInput
               item={this.state.item}
               handleChange={this.handleChange}

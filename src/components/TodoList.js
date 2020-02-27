@@ -1,14 +1,30 @@
 import React, { Component } from "react";
-import Item from "./TodoItem";
+// import Item from "./TodoItem";
+import TodoItem from "./TodoItem";
 export default class TodoList extends Component {
   render() {
+    const { items, clearList, handleDelete, handleEdit } = this.props;
     return (
-      <section>
-        <h2>Todo List</h2>
-        <Item />
-        <Item />
-        <Item />
-      </section>
+      <ul className="list-group my-5">
+        <h3 className="text-capitalize text-center">待辦清單</h3>
+        {items.map(item => {
+          return (
+            <TodoItem
+              key={item.id}
+              title={item.title}
+              handleDelete={() => handleDelete(item.id)}
+              handleEdit={() => handleEdit(item.id)}
+            />
+          );
+        })}
+        <button
+          type="button"
+          className="btn btn-danger btn-block text-uppercase mt-5"
+          onClick={clearList}
+        >
+          清除所有項目
+        </button>
+      </ul>
     );
   }
 }

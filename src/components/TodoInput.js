@@ -20,8 +20,16 @@ export default class TodoInput extends Component {
               className="form-control text-capitalize"
             />
           </div>
-          <button type="submit" className="btn btn-block btn-primary mt-3">
-            新增項目
+          <button
+            type="submit"
+            disabled={item ? false : true}
+            className={
+              editItem
+                ? "btn btn-block btn-success mt-3"
+                : "btn btn-block btn-primary mt-3"
+            }
+          >
+            {editItem ? "很愛改？要改啥？" : "新增清單"}
           </button>
         </form>
       </div>
